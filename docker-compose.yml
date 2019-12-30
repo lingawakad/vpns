@@ -21,7 +21,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=http"
       - "traefik.http.routers.traefik.rule=Host(`traefik.spaceling.sh`)"
-      - "traefik.http.middlewares.traefik-auth.basicauth.users=lingawakad:$$apr1$$Z6Bs7AF2$$GYrT8TZdvGHmUOwmwEXMu."
+      - "traefik.http.middlewares.traefik-auth.basicauth.users="
       - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
       - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
       - "traefik.http.routers.traefik-secure.entrypoints=https"
