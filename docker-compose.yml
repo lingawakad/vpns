@@ -20,21 +20,21 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=http"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.spaceling.sh`)"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.@DOMAIN`)"
       - "traefik.http.middlewares.traefik-auth.basicauth.users="
       - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
       - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
       - "traefik.http.routers.traefik-secure.entrypoints=https"
-      - "traefik.http.routers.traefik-secure.rule=Host(`traefik.spaceling.sh`)
+      - "traefik.http.routers.traefik-secure.rule=Host(`traefik.@DOMAIN`)"
       - "traefik.http.routers.traefik-secure.middlewares=traefik-auth"
       - "traefik.http.routers.traefik.tls=true"
       - "traefik.http.routers.traefik.tls.certresolver=cloudflare"
-      - "traefik.http.routers.traefik.tls.domains[0].main=spaceling.sh"
-      - "traefik.http.routers.traefik.tls.domains[0].sans=*.spaceling.sh"
+      - "traefik.http.routers.traefik.tls.domains[0].main=@DOMAIN"
+      - "traefik.http.routers.traefik.tls.domains[0].sans=*.@DOMAIN"
       - "traefik.http.routers.traefik.service=api@internal"
     environment:
-      - CF_API_EMAIL=webmaster@spaceling.sh
-      - CF_API_KEY=
+      - CF_API_EMAIL=webmaster@@DOMAIN
+      - CF_API_KEY=@GLOBAL_API
 
   calibre-web:
     image: linuxserver/calibre-web
@@ -51,11 +51,11 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.calibre.entrypoints=http"
-      - "traefik.http.routers.calibre.rule=Host(`calibre.spaceling.sh`)"
+      - "traefik.http.routers.calibre.rule=Host(`calibre.@DOMAIN`)"
       - "traefik.http.routers.calibre.middlewares=https-redirect@file"
       - "traefik.http.routers.calibre-secure.middlewares=secured@file"
       - "traefik.http.routers.calibre-secure.entrypoints=https"
-      - "traefik.http.routers.calibre-secure.rule=Host(`calibre.spaceling.sh`)"
+      - "traefik.http.routers.calibre-secure.rule=Host(`calibre.@DOMAIN`)"
       - "traefik.http.routers.calibre-secure.tls=true"
       - "traefik.http.routers.calibre-secure.tls.certresolver=cloudflare"
       - "traefik.http.routers.calibre-secure.service=calibre"
@@ -86,11 +86,11 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.syncthing.entrypoints=http"
-      - "traefik.http.routers.syncthing.rule=Host(`syncthing.spaceling.sh`)"
+      - "traefik.http.routers.syncthing.rule=Host(`syncthing.@DOMAIN`)"
       - "traefik.http.routers.syncthing.middlewares=https-redirect@file"
       - "traefik.http.routers.syncthing-secure.middlewares=secured@file"
       - "traefik.http.routers.syncthing-secure.entrypoints=https"
-      - "traefik.http.routers.syncthing-secure.rule=Host(`syncthing.spaceling.sh`)"
+      - "traefik.http.routers.syncthing-secure.rule=Host(`syncthing.@DOMAIN`)"
       - "traefik.http.routers.syncthing-secure.tls=true"
       - "traefik.http.routers.syncthing-secure.tls.certresolver=cloudflare"
       - "traefik.http.routers.syncthing-secure.service=syncthing"
