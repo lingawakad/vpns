@@ -1,0 +1,27 @@
+api:
+  dashboard: true
+
+entryPoints:
+  http:
+    address: ":80"
+  https:
+    address: ":443"
+
+providers:
+  docker:
+    endpoint: "tcp://socket-proxy:2375"
+    watch: true
+    exposedbydefault: false
+  file:
+    filename: /config.yml
+
+certificatesResolvers:
+  cloudflare:
+    acme:
+      email: webmaster@spaceling.sh
+      storage: acme.json
+      dnsChallenge:
+        provider: cloudflare
+        resolvers:
+          - "1.1.1.1:53"
+          - "1.0.0.1:53"
