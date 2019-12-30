@@ -34,7 +34,7 @@ services:
       - "traefik.http.routers.traefik.service=api@internal"
     environment:
       - CF_API_EMAIL=webmaster@spaceling.sh
-      - CF_API_KEY=9da2d616c7ebf34a3830694f4e02fca32787e
+      - CF_API_KEY=
 
   calibre-web:
     image: linuxserver/calibre-web
