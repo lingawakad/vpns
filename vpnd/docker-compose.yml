@@ -1,13 +1,13 @@
 version: "3.8"
-##################
-# VPNS - // - VPS side
-##################
 
 ##################
-# Services
+# VPND - // - Docker@home side
 ##################
+
 services:
+##################
 # SWAG - // - LSIO Secure Web Application Gateway
+##################
   swag:
     image: ghcr.io/linuxserver/swag
     container_name: swag
@@ -29,7 +29,9 @@ services:
       - 80:80
     restart: unless-stopped
 
+##################
 # Wireguard - // - an extremely simple yet fast and modern VPN
+##################
   wireguard:
     image: ghcr.io/linuxserver/wireguard
     container_name: wireguard
@@ -40,17 +42,7 @@ services:
       - PUID=$PUID
       - PGID=$PGID
       - TZ=$TZ
-      - SERVERURL=$DOMAIN
-      - SERVERPORT=51820
-      - PEERS=1
-      - PEERDNS=auto
-      - INTERNAL_SUBNET=$WG_SUBNET
-      - ALLOWEDIPS=$WG_IPS
     volumes:
-      - ./wireguard/config:/config
+      - ./Wireguard/config:/config
       - /lib/modules:/lib/modules
-    ports:
-      - 51820:51820/udp
-    sysctls:
-      - net.ipv4.conf.all.src_valid_mark=1
     restart: unless-stopped
