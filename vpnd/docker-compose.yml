@@ -5,9 +5,7 @@ version: "3.8"
 ##################
 
 services:
-##################
-# SWAG - // - LSIO Secure Web Application Gateway
-##################
+
   swag:
     image: ghcr.io/linuxserver/swag
     container_name: swag
@@ -24,14 +22,11 @@ services:
       - DNSPLUGIN=cloudflare
     volumes:
       - ./swag/config:/config
-    ports:
-      - 443:443
-      - 80:80
+    network_mode: "service:wireguard"
+    depends_on:
+      - wireguard
     restart: unless-stopped
 
-##################
-# Wireguard - // - an extremely simple yet fast and modern VPN
-##################
   wireguard:
     image: ghcr.io/linuxserver/wireguard
     container_name: wireguard
@@ -43,6 +38,54 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - ./Wireguard/config:/config
+      - ./wireguard/config:/config
       - /lib/modules:/lib/modules
+    ports:
+      - 80:80
+      - 443:443
+      - 51820:51820/udp
+    restart: unless-stopped
+
+  rss:
+    image: ghcr.io/linuxserver/freshrss
+    container_name: rss
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - ./freshrss:/config
+    restart: unless-stopped
+
+  heimdall:
+    image: ghcr.io/linuxserver/heimdall
+    container_name: heimdall
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - ./heimdall:/config
+    restart: unless-stopped
+
+  wallabag:
+    image: wallabag/wallabag
+    container_name: wallabag
+    environment:
+      - SYMFONY__ENV__DOMAIN_NAME=https://bag.$DOMAIN
+    volumes:
+      - /home/apps/wallabag/data:/var/www/wallabag/data
+      - /home/apps/wallabag/images:/var/www/wallabag/web/assets/images
+    restart: unless-stopped
+
+  cops:
+    image: ghcr.io/linuxserver/cops
+    container_name: cops
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - ./calibre/books:/books
+      - ./calibre/config:/config
     restart: unless-stopped

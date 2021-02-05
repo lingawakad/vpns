@@ -24,9 +24,9 @@ services:
       - DNSPLUGIN=cloudflare
     volumes:
       - ./swag/config:/config
-    ports:
-      - 443:443
-      - 80:80
+    network_mode: "service:wireguard"
+    depends_on:
+      - wireguard
     restart: unless-stopped
 
 # Wireguard - // - an extremely simple yet fast and modern VPN
@@ -50,6 +50,8 @@ services:
       - ./wireguard/config:/config
       - /lib/modules:/lib/modules
     ports:
+      - 80:80
+      - 443:443
       - 51820:51820/udp
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
