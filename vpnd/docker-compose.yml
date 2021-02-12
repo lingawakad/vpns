@@ -67,16 +67,6 @@ services:
       - ./heimdall:/config
     restart: unless-stopped
 
-  bag:
-    image: wallabag/wallabag
-    container_name: bag
-    environment:
-      - SYMFONY__ENV__DOMAIN_NAME=https://bag.$DOMAIN
-    volumes:
-      - /home/apps/wallabag/data:/var/www/wallabag/data
-      - /home/apps/wallabag/images:/var/www/wallabag/web/assets/images
-    restart: unless-stopped
-
   library:
     image: ghcr.io/linuxserver/cops
     container_name: library
