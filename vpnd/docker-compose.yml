@@ -96,7 +96,7 @@ services:
     environment:
       - BIND_ADDRESS=0.0.0.0:8080
       - BASE_URL=https://searx.spaceling.sh
-      - MORTY_URL=https://searx.spaceling.sh/morty/
+      - MORTY_URL=localhost/morty/
       - MORTY_KEY=$MORTY_KEY
     volumes:
       - ./searx:/etc/searx:rw
