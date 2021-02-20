@@ -89,10 +89,11 @@ services:
     restart: unless-stopped
 
   grafana:
-    image: grafana/grafana:7.3
+    image: grafana/grafana:latest
     container_name: grafana
     ports:
       - 3000:3000
     volumes:
       - ./grafana:/var/lib/grafana
     restart: unless-stopped
+    user: $PUID
