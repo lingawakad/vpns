@@ -97,22 +97,3 @@ services:
       - ./grafana:/var/lib/grafana
     restart: unless-stopped
     user: $PUID
-
-  guac:
-    image: jasonbean/guacamole
-    container_name: guac
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - TZ=$TZ
-      - OPT_MYSQL=Y
-    volumes:
-      - ./guac:/config
-    restart: unless-stopped
-
-  guacd:
-    image: ghcr.io/linuxserver/guacd
-    container_name: guacd
-    ports:
-      - 4822:4822
-    restart: unless-stopped
