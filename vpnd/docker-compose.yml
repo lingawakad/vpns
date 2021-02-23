@@ -108,6 +108,11 @@ services:
       - OPT_MYSQL=Y
     volumes:
       - ./guac:/config
+    restart: unless-stopped
+
+  guacd:
+    image: ghcr.io/linuxserver/guacd
+    container_name: guacd
     ports:
-      - 8080:8080
-    restart: always
+      - 4822:4822
+    restart: unless-stopped
