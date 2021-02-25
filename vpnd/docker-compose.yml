@@ -100,6 +100,7 @@ services:
 
   foundry:
     image: felddy/foundryvtt:release
+    container_name: foundry
     hostname: foundry.spaceling.sh
     init: true
     restart: "unless-stopped"
