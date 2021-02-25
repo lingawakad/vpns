@@ -109,4 +109,3 @@ services:
     environment:
       - FOUNDRY_PASSWORD=$FOUNDRY_PW
       - FOUNDRY_USERNAME=$FOUNDRY_USER
-      - FOUNDRY_ADMIN_KEY=$FOUNDRY_KEY
