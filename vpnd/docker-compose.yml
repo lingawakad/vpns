@@ -108,3 +108,7 @@ services:
       - ./foundry:/data
     environment:
       - FOUNDRY_RELEASE_URL=$FOUNDRY_URL
+      - CONTAINER_CACHE=/data
+      - FOUNDRY_UID=&PUID
+      - FOUNDRY_GID=$PGID
+      - TIMEZONE=$TZ
