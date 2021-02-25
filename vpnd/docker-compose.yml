@@ -107,6 +107,4 @@ services:
     volumes:
       - ./foundry:/data
     environment:
-      - FOUNDRY_PASSWORD=$FOUNDRY_PW
-      - FOUNDRY_USERNAME=$FOUNDRY_USER
-      - FOUNDRY_LICENSE_KEY=$FOUNDRY_KEY
+      - FOUNDRY_RELEASE_URL=$FOUNDRY_URL
