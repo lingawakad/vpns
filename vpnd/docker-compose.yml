@@ -97,3 +97,15 @@ services:
       - ./grafana:/var/lib/grafana
     restart: unless-stopped
     user: $PUID
+
+  foundry:
+    image: felddy/foundryvtt:release
+    hostname: foundry.spaceling.sh
+    init: true
+    restart: "unless-stopped"
+    volumes:
+      - ./foundry:/data
+    environment:
+      - FOUNDRY_PASSWORD=$FOUNDRY_PW
+      - FOUNDRY_USERNAME=$FOUNDRY_USER
+      - FOUNDRY_ADMIN_KEY=$FOUNDRY_KEY
