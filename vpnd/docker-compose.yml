@@ -82,7 +82,7 @@ services:
   foundry:
     build:
       context: ./
-      dockerfile: ./foundry/Dockerfile
+      dockerfile: ./Dockerfile
     image: foundry:0.7.9
     container_name: foundry
     volumes:
