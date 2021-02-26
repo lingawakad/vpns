@@ -97,3 +97,13 @@ services:
       - ./grafana:/var/lib/grafana
     restart: unless-stopped
     user: $PUID
+
+  foundry:
+    build:
+      context: ./foundry
+      dockerfile: ./foundry/Dockerfile
+    image: foundry:0.7.9
+    container_name: foundry
+    volumes:
+      - ./foundry:/home/foundry/data
+    restart: unless-stopped
