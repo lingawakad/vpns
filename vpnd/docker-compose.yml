@@ -100,7 +100,8 @@ services:
 
   foundry:
     build:
-      dockerfile: docker/Dockerfile
+      context: ./
+      dockerfile: Dockerfile
     image: foundryvtt:0.7.9
     container_name: foundry
     volumes:
