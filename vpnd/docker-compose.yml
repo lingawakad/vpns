@@ -100,7 +100,7 @@ services:
 
   foundry:
     build:
-      context: ./foundry
+      context: ./
       dockerfile: ./foundry/Dockerfile
     image: foundry:0.7.9
     container_name: foundry
