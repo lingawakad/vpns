@@ -78,13 +78,3 @@ services:
       - ./calibre/books:/books
       - ./calibre/config:/config
     restart: unless-stopped
-
-  foundry:
-    build:
-      context: ./
-      dockerfile: ./Dockerfile
-    image: foundry:0.7.9
-    container_name: foundry
-    volumes:
-      - ./foundry:/home/foundry/data
-    restart: unless-stopped
